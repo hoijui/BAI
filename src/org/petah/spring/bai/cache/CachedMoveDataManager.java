@@ -31,8 +31,9 @@ public class CachedMoveDataManager implements Serializable {
 
     public CachedMoveDataManager(OOAICallback callback) {
         Profiler.start(CachedMoveDataManager.class, "CachedMoveDataManager()");
+		String modSpecifier = callback.getMod().getHumanName().replaceAll("[^0-9a-zA-Z_-.]", "_");
         File file = new File(InformationLogger.getCacheDirectory().getAbsolutePath() + File.separator +
-                callback.getMod().getFileName() + "." + serialVersionUID + ".movedata.bin");
+                modSpecifier + "." + serialVersionUID + ".movedata.bin");
         CachedMoveDataManager loadedObject = (CachedMoveDataManager) IOUtil.loadCacheFile(cacheToDisk, file);
         if (loadedObject != null) {
             moveData = loadedObject.moveData;
