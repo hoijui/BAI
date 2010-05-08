@@ -41,8 +41,9 @@ public class CachedUnitDefManager implements Serializable {
 //    }
     public CachedUnitDefManager(OOAICallback callback) {
         Profiler.start(CachedUnitDefManager.class, "CachedUnitDefManager()");
+		String modSpecifier = callback.getMod().getHumanName().replaceAll("[^0-9a-zA-Z_-.]", "_");
         File file = new File(InformationLogger.getCacheDirectory().getAbsolutePath() + File.separator +
-                callback.getMod().getFileName() + "." + serialVersionUID + ".unitdef.bin");
+                modSpecifier + "." + serialVersionUID + ".unitdef.bin");
         CachedUnitDefManager loadedObject = (CachedUnitDefManager) IOUtil.loadCacheFile(cacheToDisk, file);
         if (loadedObject != null) {
             unitDefs = loadedObject.unitDefs;
